@@ -72,7 +72,7 @@ for e in libraryId:
 print(Libraries)
 
 newJson = open("libraries-and-books.json", "x")
-newJson.write(json.dumps(Libraries))
+newJson.write(json.dumps(Libraries, indent=4))
 
 hoy = str(date.today())
 fecha = hoy.split("-")
@@ -91,8 +91,11 @@ for i in Libraries:
         editorial.append(i["books"][e]["bookEditorial"])
         aPubli.append(i["books"][e]["bookPublication"])
 
-pf = pd.DataFrame({"Id de libreria" : idLibraries, "Id de libro": idLibros, "Titulo": titulo, "Editorial": editorial, "Año de publicacion":aPubli})
+a = {"Id de libreria" : idLibraries, "Id de libro": idLibros, "Titulo": titulo, "Editorial": editorial, "Año de publicacion":aPubli}
+
+pf = pd.DataFrame.from_dict(a, orient='index')
 nombreExcel = fecha[0] + "-" + fecha[1] +"-libros-prestados.xlsx"
+pf = pf.transpose()
 pf.to_excel(nombreExcel)
 
 

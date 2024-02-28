@@ -24,7 +24,7 @@ for e in range(len(passwordHashed) -1):
     usersData[e]["password"] = passwordHashed[e]
 
 newJson = open("secure-users.json", "x")
-newJson.write(json.dumps(usersData))
+newJson.write(json.dumps(usersData, indent=4))
 
 
 
